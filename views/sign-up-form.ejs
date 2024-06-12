@@ -29,5 +29,12 @@
       <input id="re-password" name="re_password" type="password" />
       <button>Sign Up</button>
     </form>
+
+    <% if (errors) {%>
+      <ul>
+        <% errors.forEach(err => {%>
+            <li><%=err.msg%></li>
+          <%})};%>
+      </ul>
   </body>
 </html>
