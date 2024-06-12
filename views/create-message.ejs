@@ -14,5 +14,11 @@
       <textarea name="content" rows="5" cols="25"></textarea>
       <button>Create massage</button>
     </form>
+    <% if (errors) {%>
+      <ul>
+        <% errors.forEach(err => {%>
+            <li><%=err.msg%></li>
+          <%})};%>
+      </ul>
   </body>
 </html>

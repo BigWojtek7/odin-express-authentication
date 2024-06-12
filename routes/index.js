@@ -2,14 +2,22 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const User = require('../models/user');
+const Message = require('../models/message');
 const bcrypt = require('bcryptjs');
 
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require('express-validator');
 
-router.get('/', (req, res) => {
-  res.render('index', { user: req.user });
-});
+router.get(
+  '/',
+  asyncHandler(async (req, res) => {
+    const allMessages = await Message.find()
+      .sort({ date: 1 })
+      .populate('user')
+      .exec();
+    res.render('index', { user: req.user, messages: allMessages });
+  })
+);
 
 router.get('/sign-up', (req, res) =>
   res.render('sign-up-form', { errors: null })
@@ -62,9 +70,33 @@ router.post(
   })
 );
 
-router.get('/create-massage', (req, res) => {
-  res.render('create-massage');
+router.get('/create-message', (req, res) => {
+  res.render('create-message', { errors: null });
 });
+
+router.post('/create-message', [
+  body('title', 'title is require').trim().isLength({ min: 1 }).escape(),
+  body('content', 'content is required').trim().isLength({ min: 1 }).escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    console.log(req.user);
+    const message = new Message({
+      title: req.body.title,
+      content: req.body.content,
+      date: new Date(),
+      user: req.user,
+    });
+
+    if (!errors.isEmpty()) {
+      res.render('create-message', { message: message, errors: errors });
+    } else {
+      await message.save();
+      res.redirect('/');
+    }
+  }),
+]);
 
 router.get('/log-out', (req, res, next) => {
   req.logout((err) => {
