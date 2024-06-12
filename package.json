@@ -1,9 +1,10 @@
 {
   "name": "odin-express-authentication",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./app",
+    "devstart": "nodemon ./app",
+    "serverstart": "DEBUG=express-locallibrary-tutorial:* npm run devstart"
   },
   "author": "",
   "license": "ISC",
