@@ -35,7 +35,7 @@ router.post('/sign-up', [
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
 
-    const hashedPassword = await bcrypt.hash(req.body.password, 10)
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = new User({
       first_name: req.body.first_name,
       last_name: req.body.last_name,
@@ -43,7 +43,6 @@ router.post('/sign-up', [
       password: hashedPassword,
     });
     if (!errors.isEmpty()) {
-      console.log('walter');
       res.render('sign-up-form', {
         user: user,
         errors: errors.array(),
@@ -62,6 +61,10 @@ router.post(
     failureRedirect: '/',
   })
 );
+
+router.get('/create-massage', (req, res) => {
+  res.render('create-massage');
+});
 
 router.get('/log-out', (req, res, next) => {
   req.logout((err) => {
