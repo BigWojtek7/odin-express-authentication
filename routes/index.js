@@ -49,6 +49,7 @@ router.post('/sign-up', [
       last_name: req.body.last_name,
       username: req.body.username,
       password: hashedPassword,
+      member_status: false,
     });
     if (!errors.isEmpty()) {
       res.render('sign-up-form', {
@@ -98,6 +99,20 @@ router.post('/create-message', [
   }),
 ]);
 
+router.get('/join-club', (req, res) => {
+  res.render('join-club')
+})
+
+router.post('/join-club', async (req, res) => {
+
+  // const user = await User.findById(req.user.id).exec()
+  if( req.body.password === 'club'){
+    await User.findByIdAndUpdate( { _id: req.user.id }, {member_status: true})
+    res.redirect('/');
+  }else {
+    res.redirect('/join-club')
+  }
+})
 router.get('/log-out', (req, res, next) => {
   req.logout((err) => {
     if (err) {

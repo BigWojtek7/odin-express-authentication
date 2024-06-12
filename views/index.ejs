@@ -3,29 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <title></title>
+    <style>
+      .message {
+        border: 1px solid black;
+      }
+    </style>
   </head>
   <body>
     <% if (user) {%>
-      <h1>WELCOME BACK <%= user.username %></h1>
-      <a href="/create-message">Create massage</a>
-      <a href="/log-out">LOG OUT</a>
+    <h1>WELCOME BACK <%= user.username %></h1>
+    <a href="/create-message">Create massage</a>
+    <a href="/join-club">JOIN THE CLUB !</a>
+    <a href="/log-out">LOG OUT</a>
     <%} else { %>
-      <h1>please log in</h1>
-      <form action="/log-in" method="POST">
-        <label for="username">Username</label>
-        <input name="username" placeholder="username" type="text" />
-        <label for="password">Password</label>
-        <input name="password" type="password" />
-        <button>Log In</button>
-      </form>
-    <%}%>
-    <% messages.forEach(ms => {%>
-      <div class="message">
-        <p><%=ms.title%></p>
-        <p><%=ms.content%></p>
-        <p><%=ms.date.toLocaleString()%></p>
-      </div>
+    <h1>please log in</h1>
+    <form action="/log-in" method="POST">
+      <label for="username">Username</label>
+      <input name="username" placeholder="username" type="text" />
+      <label for="password">Password</label>
+      <input name="password" type="password" />
+      <button>Log In</button>
+    </form>
+    <%}%> <% messages.forEach(ms => {%>
+    <div class="message">
+      <p><%=ms.title%></p>
+      <p><%=ms.content%></p>
+      <p><%=ms.date.toLocaleString()%></p>
+    </div>
     <%});%>
-
   </body>
 </html>
