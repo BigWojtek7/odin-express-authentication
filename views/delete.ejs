@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1><%= title %></h1>
-      <div class="message">
-        <p><%=message.title%></p>
-        <p><%=message.content%></p>
-      </div>
-    <p>Do you really want to delete this message?</p>
-    <form method="POST">
-      <input type="hidden" name="messageid" value="<%=message._id%>">
-      <button type="submit">Delete</button> <a href="/">Go back</a>
-    </form>
-  </body>
-</html>
+<body>
+  <h1><%= title %></h1>
+  <div class="message">
+    <p><%=message.title%></p>
+    <p><%=message.content%></p>
+  </div>
+  <p>Do you really want to delete this message?</p>
+  <form method="POST">
+    <input type="hidden" name="messageid" value="<%=message._id%>" />
+    <button type="submit">Delete</button> <a href="/">Go back</a>
+  </form>
+</body>

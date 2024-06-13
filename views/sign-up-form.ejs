@@ -1,42 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title></title>
-  </head>
-  <body>
-    <h1>Sign Up</h1>
-    <form action="" method="POST">
-      <label for="first-name">First Name</label>
-      <input
-        id="first-name"
-        name="first_name"
-        placeholder="first name"
-        type="text"
-      />
-      <label for="last-name">Last Name</label>
-      <input
-        id="last-name"
-        name="last_name"
-        placeholder="last name"
-        type="text"
-      />
-      <label for="username">Username</label>
-      <input id="username" name="username" placeholder="username" type="text" />
-      <label for="password">Password</label>
-      <input id="password" name="password" type="password" />
-      <label for="re-password">Re-Password</label>
-      <input id="re-password" name="re_password" type="password" />
-      <label for="admin">Is admin?</label>
-      <input type="checkbox" name="is_admin" id="admin" value="checked">
-      <button>Sign Up</button>
-    </form>
 
-    <% if (errors) {%>
-      <ul>
-        <% errors.forEach(err => {%>
-            <li><%=err.msg%></li>
-          <%})};%>
-      </ul>
-  </body>
-</html>
+<h1>Sign Up</h1>
+<form action="" method="POST">
+  <label for="first-name">First Name</label>
+  <input
+    id="first-name"
+    name="first_name"
+    type="text"
+  />
+  <label for="last-name">Last Name</label>
+  <input
+    id="last-name"
+    name="last_name"
+    type="text"
+  />
+  <label for="username">Username</label>
+  <input id="username" name="username" type="text" />
+  <label for="password">Password</label>
+  <input id="password" name="password" type="password" />
+  <label for="re-password">Re-Password</label>
+  <input id="re-password" name="re_password" type="password" />
+  <label for="admin">Is admin?</label>
+  <input type="checkbox" name="is_admin" id="admin" value="checked">
+  <button>Sign Up</button>
+  <a href="/">Go back</a>
+</form>
+
+<% if (errors) {%>
+  <ul>
+    <% errors.forEach(err => {%>
+        <li><%=err.msg%></li>
+      <%})};%>
+  </ul>
+</body>
+

@@ -1,3 +1,32 @@
-.message {
-  border: 1px solid black;
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #f3f3f3;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.content > .messages {
+  display: flex;
+  gap: 20px;
+  margin: 30px 0;
+}
+
+.messages > .message {
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0px 6px 8px #bebebe;
+  background-color: white;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+input {
+  margin-bottom: 10px;
 }
