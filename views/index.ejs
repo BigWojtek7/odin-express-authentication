@@ -32,6 +32,7 @@
       <% if (user && user.member_status){ %>
         <p><strong><%=ms.user.username%></strong></p>
         <p><%=ms.date.toLocaleString()%></p>
+        <p><a href="<%=ms.url + '/delete'%>">Delete</a></p>
       <%}%>
     </div>
     <%});%>

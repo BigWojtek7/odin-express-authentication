@@ -100,19 +100,32 @@ router.post('/create-message', [
 ]);
 
 router.get('/join-club', (req, res) => {
-  res.render('join-club')
-})
+  res.render('join-club');
+});
 
 router.post('/join-club', async (req, res) => {
-
   // const user = await User.findById(req.user.id).exec()
-  if( req.body.password === 'club'){
-    await User.findByIdAndUpdate( { _id: req.user.id }, {member_status: true})
+  if (req.body.password === 'club') {
+    await User.findByIdAndUpdate({ _id: req.user.id }, { member_status: true });
     res.redirect('/');
-  }else {
-    res.redirect('/join-club')
+  } else {
+    res.redirect('/join-club');
   }
-})
+});
+
+router.get('/:id/delete', async (req, res) => {
+  const message = await Message.findById(req.params.id).exec();
+  res.render('delete', {title: 'Delete message', message: message});
+});
+
+router.post(
+  '/:id/delete',
+  asyncHandler(async (req, res, next) => {
+    await Message.findByIdAndDelete(req.body.messageid);
+    res.redirect('/');
+  })
+);
+
 router.get('/log-out', (req, res, next) => {
   req.logout((err) => {
     if (err) {
