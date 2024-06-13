@@ -3,11 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title></title>
-    <style>
-      .message {
-        border: 1px solid black;
-      }
-    </style>
+    <link rel="stylesheet" , href="/stylesheets/style.css" />
   </head>
   <body>
     <% if (user) {%>
@@ -29,14 +25,13 @@
     <div class="message">
       <p><%=ms.title%></p>
       <p><%=ms.content%></p>
-      
+
       <% if ((user && user.member_status) || (user && user.is_admin)){ %>
-        <p><strong><%=ms.user.username%></strong></p>
-        <p><%=ms.date.toLocaleString()%></p>
-        <% if(user && user.is_admin) {%>
-          <p><a href="<%=ms.url + '/delete'%>">Delete</a></p>
-        <%}%>
-      <%}%>
+      <p><strong><%=ms.user.username%></strong></p>
+      <p><%=ms.date.toLocaleString()%></p>
+      <% if(user && user.is_admin) {%>
+      <p><a href="<%=ms.url + '/delete'%>">Delete</a></p>
+      <%}%> <%}%>
     </div>
     <%});%>
   </body>
