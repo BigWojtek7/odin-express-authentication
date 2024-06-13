@@ -43,7 +43,6 @@ router.post('/sign-up', [
 
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
-    console.log('waaa', req.body.is_admin === 'checked')
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = new User({
       first_name: req.body.first_name,
@@ -51,7 +50,7 @@ router.post('/sign-up', [
       username: req.body.username,
       password: hashedPassword,
       member_status: false,
-      is_admin: req.body.is_admin === 'checked'
+      is_admin: req.body.is_admin === 'checked',
     });
     if (!errors.isEmpty()) {
       res.render('sign-up-form', {
@@ -84,7 +83,6 @@ router.post('/create-message', [
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
 
-    console.log(req.user);
     const message = new Message({
       title: req.body.title,
       content: req.body.content,
@@ -107,7 +105,7 @@ router.get('/join-club', (req, res) => {
 
 router.post('/join-club', async (req, res) => {
   // const user = await User.findById(req.user.id).exec()
-  if (req.body.password === 'club') {
+  if (req.body.password === process.env.SECRET_CLUB_PW) {
     await User.findByIdAndUpdate({ _id: req.user.id }, { member_status: true });
     res.redirect('/');
   } else {
@@ -117,7 +115,7 @@ router.post('/join-club', async (req, res) => {
 
 router.get('/:id/delete', async (req, res) => {
   const message = await Message.findById(req.params.id).exec();
-  res.render('delete', {title: 'Delete message', message: message});
+  res.render('delete', { title: 'Delete message', message: message });
 });
 
 router.post(

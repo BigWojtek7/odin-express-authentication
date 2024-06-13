@@ -13,5 +13,3 @@ MessageSchema.virtual('url').get(function () {
 });
 
 module.exports = mongoose.model('Message', MessageSchema);
-
-

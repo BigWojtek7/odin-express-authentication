@@ -22,7 +22,7 @@ app.use(expressLayouts)
 
 app.use(
   session({
-    secret: 'cats',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 1000 * 60 * 60 * 24}, // one day
