@@ -11,20 +11,27 @@ mongoose.connect(process.env.MONGO_DB);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'mongo connection error'));
 
-
 const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
-
+app.use(
+  session({
+    secret: 'cats',
+    resave: false,
+    saveUninitialized: true,
+    store: MongoStore.create({
+      client: mongoose.connection.getClient(),
+    }),
+  })
+);
 
 app.use(passport.session());
 
 app.use(express.urlencoded({ extended: false }));
 
-require('./config/passport')
+require('./config/passport');
 
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;

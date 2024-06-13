@@ -23,16 +23,19 @@
       <label for="password">Password</label>
       <input name="password" type="password" />
       <button>Log In</button>
+      <a href="/sign-up">Sign Up</a>
     </form>
     <%}%> <% messages.forEach(ms => {%>
     <div class="message">
       <p><%=ms.title%></p>
       <p><%=ms.content%></p>
       
-      <% if (user && user.member_status){ %>
+      <% if ((user && user.member_status) || (user && user.is_admin)){ %>
         <p><strong><%=ms.user.username%></strong></p>
         <p><%=ms.date.toLocaleString()%></p>
-        <p><a href="<%=ms.url + '/delete'%>">Delete</a></p>
+        <% if(user && user.is_admin) {%>
+          <p><a href="<%=ms.url + '/delete'%>">Delete</a></p>
+        <%}%>
       <%}%>
     </div>
     <%});%>

@@ -39,10 +39,11 @@ router.post('/sign-up', [
     })
     .trim()
     .escape(),
+  body('is_admin').escape(),
 
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
-
+    console.log('waaa', req.body.is_admin === 'checked')
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = new User({
       first_name: req.body.first_name,
@@ -50,6 +51,7 @@ router.post('/sign-up', [
       username: req.body.username,
       password: hashedPassword,
       member_status: false,
+      is_admin: req.body.is_admin === 'checked'
     });
     if (!errors.isEmpty()) {
       res.render('sign-up-form', {
