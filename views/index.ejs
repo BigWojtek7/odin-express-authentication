@@ -28,7 +28,11 @@
     <div class="message">
       <p><%=ms.title%></p>
       <p><%=ms.content%></p>
-      <p><%=ms.date.toLocaleString()%></p>
+      
+      <% if (user && user.member_status){ %>
+        <p><strong><%=ms.user.username%></strong></p>
+        <p><%=ms.date.toLocaleString()%></p>
+      <%}%>
     </div>
     <%});%>
   </body>
