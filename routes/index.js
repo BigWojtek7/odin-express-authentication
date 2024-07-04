@@ -42,6 +42,15 @@ router.post('/sign-up', [
   body('is_admin').escape(),
 
   asyncHandler(async (req, res, next) => {
+    const userInDatabase = await User.find({
+      username: req.body.username,
+    }).exec();
+
+    if (userInDatabase.length > 0) {
+      res.json({ success: false, msg: 'Username already exists' });
+      return;
+    }
+
     const errors = validationResult(req);
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = new User({
@@ -73,7 +82,11 @@ router.post(
 );
 
 router.get('/create-message', (req, res) => {
-  res.render('create-message', { errors: null });
+  if (req.user) {
+    res.render('create-message', { errors: null });
+  } else {
+    res.redirect('/');
+  }
 });
 
 router.post('/create-message', [
